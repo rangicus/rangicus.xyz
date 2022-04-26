@@ -9,7 +9,7 @@ import {
 
 import App from "./App";
 import HomePage from "./routes/HomePage";
-import ProjectPage from "./routes/ProjectPage";
+import ProjectPage from "./routes/projects/ProjectPage";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
