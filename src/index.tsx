@@ -1,6 +1,7 @@
 // Imports
 
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
+
 import {
 	BrowserRouter,
 	Routes,
@@ -16,17 +17,19 @@ import "./index.css";
 
 // Main
 
-const root = document.getElementById(`root`);
-render(
-	(
-		<BrowserRouter>
-			<Routes>
-				<Route path="/" element={<App />}>
-					<Route path="/" element={<HomePage />} />
-					<Route path="/projects" element={<ProjectPage />} />
+const container = document.getElementById(`app`) as HTMLElement;
+const root = createRoot(container);
+
+root.render(
+	<BrowserRouter>
+		<Routes>
+			<Route path="/" element={<App />}>
+				<Route path="/" element={<HomePage />} />
+
+				<Route path="/projects">
+					<Route index element={<ProjectPage />} />
 				</Route>
-			</Routes>
-		</BrowserRouter>
-	),
-	root,
+			</Route>
+		</Routes>
+	</BrowserRouter>
 );
