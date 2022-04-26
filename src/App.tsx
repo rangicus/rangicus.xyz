@@ -1,23 +1,25 @@
 // Imports
 
-import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import { CSSProperties } from "react";
+import { Outlet } from "react-router-dom";
+
+import Navbar from "./components/Navbar";
+
+// Styles
+
+const containerStyle: CSSProperties = {
+	height: `100%`,
+	
+	display: `flex`,
+	flexDirection: `column`,
+}
 
 // Main Component
 
 export default function App () {
 	return (
-		<div>
-			<nav
-				style={{
-					borderBottom: `solid 1px`,
-					paddingBottom: `1rem`,
-				}}
-			>
-				<Link to="/">Home</Link>
-				<Link to="/Project1">Project1</Link>
-				<Link to="/Project2">Project2</Link>
-			</nav>
+		<div style={containerStyle}>
+			<Navbar />
 
 			<Outlet />
 		</div>
