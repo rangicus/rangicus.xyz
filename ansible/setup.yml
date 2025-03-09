@@ -47,4 +47,5 @@
     - name: start website
       service:
         name: rangicus.service
-        state: started
+        state: reloaded
+        enabled: true
