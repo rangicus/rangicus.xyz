@@ -28,4 +28,11 @@ export default defineConfig([
 			indent: [`warn`, `tab`],
 		}
 	},
+
+	// Unicorn Rules
+	{
+		rules: {
+			"unicorn/filename-case": ["off"]
+		}
+	}
 ]);

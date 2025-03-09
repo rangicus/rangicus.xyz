@@ -1,31 +1,35 @@
+// Imports
+
+import { FaGlobe } from "react-icons/fa6";
+
+import { Project } from "@/app/page"
+
 // Main Component
 
-export default function ProjectItem () {
-    // Rendering
+export default function ProjectItem ({ project }: {
+    project: Project;
+}) {
+	// Rendering
 
-    return (
-        <div className="w-sm rounded bg-gray-800">
-            {/* Image here. */}
+	return (
+		<div className="w-sm rounded bg-gray-800 shadow shadow-gray-700">
+			{/* Image here. */}
+            {(project.img) && <img className="w-full aspect-video" src={project.img} />}
 
-            {/* <div className="px-6"> */}
-            <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2">Card Title</div>
-                <p className="text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ab ratione esse enim, quasi aliquam. Deleniti repellat soluta aperiam aliquid consectetur ea ad omnis nobis. Dicta eveniet unde illo accusamus.</p>
-            </div>
+			<div className="px-2 py-4">
+				<div className="font-bold text-xl mb-2">{project.name}</div>
+				<p className="text-base">{project.desc}</p>
+			</div>
 
-            {/* <div className="px-6 pt-4 pb-2"> */}
-            <div className="px-6 pb-2">
-                <button>Github</button>&nbsp;
-                <button>Go!</button>
-            </div>
+			<div className="px-2 pb-2">
+                <a href={process.env.BASE_URL + project.url}>
+                    <button className="bg-primary px-3 py-2 rounded cursor-pointer">
+                        <FaGlobe />
+                    </button>
+                </a>
 
-            {/* <div className="p-4 m-4">
-                <p
-                    className="text-2xl"
-                >Card Title</p>
-                
-                <p className="m-4 text-red-500">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam quam doloribus velit rem porro repellendus non, nobis quasi sint laudantium dicta voluptatibus tenetur ducimus nihil fugiat, impedit ratione sed harum.</p>
-            </div> */}
-        </div>
-    )
+				{/* <button>Github</button> */}
+			</div>
+		</div>
+	)
 }
