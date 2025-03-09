@@ -44,8 +44,35 @@
         dest: /etc/systemd/system/rangicus.service
         remote_src: true
 
+    # nginx
+
+    - name: install nginx
+      apt:
+        name: nginx
+        state: latest
+
+    - name: copy nginx site
+      copy:
+        src: /opt/rangicus.xyz/ansible.config
+        dest: /etc/nginx/sites-available/rangicus.xyz
+        remote_src: true
+
+    - name: link nginx site
+      file:
+        src: /etc/nginx/sites-available/rangicus.xyz
+        dest: /etc/nginx/sites-enabled/
+        state: link
+
+    # start services
+
     - name: start website
       service:
         name: rangicus.service
         state: reloaded
+        enabled: true
+
+    - name: start nginx
+      service:
+        name: nginx
+        state: restarted
         enabled: true
