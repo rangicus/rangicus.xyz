@@ -1,6 +1,6 @@
 // Imports
 
-import { FaGlobe } from "react-icons/fa6";
+import { FaGlobe, FaGithub } from "react-icons/fa6";
 
 import { Project } from "@/app/page"
 
@@ -23,10 +23,18 @@ export default function ProjectItem ({ project }: {
 
 			<div className="px-2 pb-2">
                 <a href={process.env.BASE_URL + project.url}>
-                    <button className="bg-primary px-3 py-2 rounded cursor-pointer">
+                    <button className="bg-primary px-3 py-2 rounded cursor-pointer mr-1">
                         <FaGlobe />
                     </button>
                 </a>
+
+                {(project.github) && (
+                    <a href={project.github} target="_blank">
+                        <button className="bg-secondary px-3 py-2 rounded cursor-pointer">
+                            <FaGithub />
+                        </button>
+                    </a>
+                )}
 
 				{/* <button>Github</button> */}
 			</div>

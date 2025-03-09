@@ -11,6 +11,8 @@ export interface Project {
 
 	url: string;
 	img?: string;
+
+	github?: string;
 }
 
 // Validators
@@ -40,6 +42,9 @@ function parseProject (x: unknown): Project | undefined {
 	// img
 	if (!hasOwnProperty(x, `img`)) console.warn(`No Project.img assigned to "${x.name}"!`);
 	else if (typeof x.img !== `string`) console.warn(`Invalid Project.img on "${x.name}"!`);
+
+	// github
+	if (hasOwnProperty(x, `github`) && typeof x.github !== `string`) console.warn(`Invalid Project.github assigned to "${x.name}"!`);
 
 	return x as Project;
 }
