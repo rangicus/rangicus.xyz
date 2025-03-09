@@ -1,0 +1,12 @@
+[Unit] 
+Description=rangicus.xyz
+After=network.target
+
+[Service] 
+WorkingDirectory=/opt/rangicus.xyz
+User=root
+Environment="BASE_URL=http://rangicus.xyz" 
+ExecStart=npm run build && npm run start
+
+[Install] 
+WantedBy=multi-user.target
