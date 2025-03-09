@@ -1,9 +1,10 @@
 // Imports
 
 import { FaGithub, FaLinkedin } from "react-icons/fa6"
+import { readFile } from "node:fs/promises";
 
 import ProjectItem from "@/components/ProjectItem";
-import { hasOwnProperty } from "@/lib/util";
+import { hasOwnProperty } from "@/lib/utility";
 
 // Types
 
@@ -76,8 +77,8 @@ function parseProjects (json: unknown): Project[] {
 // Functions
 
 async function fetchProjects (): Promise<Project[]> {
-	const response = await fetch(`${process.env.BASE_URL}/projects.json`);
-	const json = await response.json();
+	const file = await readFile(process.cwd() + `/public/projects.json`, `utf8`);
+	const json = JSON.parse(file);
 
 	const projects = parseProjects(json);
 	return projects.sort((a, b) => a.name.localeCompare(b.name));

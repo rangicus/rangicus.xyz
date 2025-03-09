@@ -29,10 +29,10 @@ export default defineConfig([
 		}
 	},
 
-	// Unicorn Rules
 	{
 		rules: {
-			"unicorn/filename-case": ["off"]
+			"@next/next/no-img-element": ["off"],
+			"unicorn/filename-case": ["off"],
 		}
 	}
 ]);

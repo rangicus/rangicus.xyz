@@ -6,6 +6,10 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 
+// Environment
+
+if (typeof process.env.BASE_URL !== `string`) throw new Error(`Unset environment variable "BASE_URL"!`);
+
 // Fonts
 
 const geistSans = Geist({
