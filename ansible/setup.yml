@@ -12,13 +12,10 @@
         name: rangicus.xyz
         use: debian
     
-    # apt
     - name: apt update
       apt:
         autoclean: yes
         update_cache: yes
-
-    # git
 
     - name: install git
       apt:
@@ -30,6 +27,16 @@
         repo: https://github.com/rangicus/rangicus.xyz.git
         dest: /opt/rangicus.xyz
         force: yes
+
+    - name: npm install
+      npm:
+        path: /opt/rangicus.xyz
+        state: present
+
+    - name: build website
+      command: npm run build
+      args:
+        chdir: /opt/rangicus.xyz
 
     - name: copy systemd service
       copy:
