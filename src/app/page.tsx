@@ -1,6 +1,6 @@
 // Imports
 
-import { FaGithub } from "react-icons/fa6"
+import { FaGithub, FaLinkedin } from "react-icons/fa6"
 
 import ProjectItem from "@/components/ProjectItem";
 import { hasOwnProperty } from "@/lib/util";
@@ -87,7 +87,7 @@ async function fetchProjects (): Promise<Project[]> {
 
 export default async function HomePage () {
 	const projects = await fetchProjects();
-	console.log(`Projects (${projects.length}):`, projects.map(x => x.name));
+	console.log(`Loaded`, projects.length, `projects.`);
 
 	return (
 		<div className="max-w-screen min-h-screen overflow-x-hidden flex flex-col justify-between">
@@ -107,7 +107,7 @@ export default async function HomePage () {
 				</div>
 
 				{/* Projects Display */}
-				<div className="w-screen flex flex-wrap gap-3 justify-center">
+				<div className="w-screen flex flex-wrap gap-4 justify-center">
 					{projects.map((project) => (
 						<ProjectItem project={project} key={project.name} />
 					))}
@@ -115,10 +115,15 @@ export default async function HomePage () {
 			</section>
 
 			{/* Footer */}
-			<footer className="w-screen flex justify-center mb-2 mt-5 text-gray-500">
+			<footer className="w-screen flex justify-center gap-2 mb-2 mt-5 text-gray-500">
 				{/* GitHub */}
 				<a href="https://github.com/rangicus" target="_blank">
 					<FaGithub />
+				</a>
+
+				{/* LinkedIn */}
+				<a href="https://www.linkedin.com/in/xavier-horn/" target="_blank">
+					<FaLinkedin />
 				</a>
 			</footer>
 		</div>
