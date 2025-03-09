@@ -12,7 +12,7 @@ export default function ProjectItem ({ project }: {
 	// Rendering
 
 	return (
-		<div className="w-sm rounded bg-gray-800 shadow shadow-gray-700 flex flex-col justify-between">
+		<div className="w-sm rounded bg-surface shadow shadow-shadow flex flex-col justify-between">
 			{/* Image here. */}
             {(project.img) && <img className="w-full aspect-video" src={project.img} />}
 
@@ -24,14 +24,14 @@ export default function ProjectItem ({ project }: {
 			<div className="px-2 pb-2">
                 <a href={process.env.BASE_URL + project.url}>
                     <button className="bg-primary px-3 py-2 rounded cursor-pointer mr-1">
-                        <FaGlobe />
+                        <FaGlobe className="text-white" />
                     </button>
                 </a>
 
                 {(project.github) && (
                     <a href={project.github} target="_blank">
                         <button className="bg-secondary px-3 py-2 rounded cursor-pointer">
-                            <FaGithub />
+                            <FaGithub className="text-white"/>
                         </button>
                     </a>
                 )}

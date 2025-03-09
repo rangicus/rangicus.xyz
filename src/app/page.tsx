@@ -118,12 +118,12 @@ export default async function HomePage () {
 			<footer className="w-screen flex justify-center gap-2 mb-2 mt-5 text-gray-500">
 				{/* GitHub */}
 				<a href="https://github.com/rangicus" target="_blank">
-					<FaGithub />
+					<FaGithub className="text-foreground" />
 				</a>
 
 				{/* LinkedIn */}
 				<a href="https://www.linkedin.com/in/xavier-horn/" target="_blank">
-					<FaLinkedin />
+					<FaLinkedin className="text-foreground" />
 				</a>
 			</footer>
 		</div>
