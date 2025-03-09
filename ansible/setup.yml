@@ -2,6 +2,11 @@
   become: true
 
   tasks:
+    - name: stop website if running
+      service:
+        name: rangicus.service
+        state: stopped
+
     - name: set hostname
       hostname:
         name: rangicus.xyz
@@ -31,3 +36,8 @@
         src: /opt/rangicus.xyz/rangicus.service
         dest: /etc/systemd/system/rangicus.service
         remote_src: true
+
+    - name: start website
+      service:
+        name: rangicus.service
+        state: started

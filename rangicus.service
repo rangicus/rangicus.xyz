@@ -6,7 +6,8 @@ After=network.target
 WorkingDirectory=/opt/rangicus.xyz
 User=root
 Environment="BASE_URL=http://rangicus.xyz" 
-ExecStart=npm run build && npm run start
+ExecStart=npm ci && npm run build && npm run start
+Restart=on-failure
 
 [Install] 
 WantedBy=multi-user.target
