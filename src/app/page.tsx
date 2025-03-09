@@ -1,5 +1,7 @@
 // Imports
 
+import { FaGithub } from "react-icons/fa6"
+
 import ProjectItem from "@/components/ProjectItem";
 import { hasOwnProperty } from "@/lib/util";
 
@@ -23,28 +25,35 @@ function parseProject (x: unknown): Project | undefined {
 
 	// name
 	if (!hasOwnProperty(x, `name`) || typeof x.name !== `string`) {
-		console.warn(`Invalid Project.name found!`);
+		console.error(`Invalid Project.name found!`);
 		return;
 	}
 
 	// url
 	if (!hasOwnProperty(x, `url`) || typeof x.url !== `string`) {
-		console.warn(`Invalid Project.url on "${x.name}"!`);
+		console.error(`Invalid Project.url on "${x.name}"!`);
 		return;
 	}
 
 	// description
 	if (!hasOwnProperty(x, `desc`) || typeof x.desc !== `string`) {
-		console.warn(`Invalid Project.desc on "${x.name}"!`);
+		console.error(`Invalid Project.desc on "${x.name}"!`);
 		return;
 	}
 
 	// img
 	if (!hasOwnProperty(x, `img`)) console.warn(`No Project.img assigned to "${x.name}"!`);
-	else if (typeof x.img !== `string`) console.warn(`Invalid Project.img on "${x.name}"!`);
+	else if (typeof x.img !== `string`) {
+		console.warn(`Invalid Project.img on "${x.name}"!`);
+		delete x.img;
+	}
 
 	// github
-	if (hasOwnProperty(x, `github`) && typeof x.github !== `string`) console.warn(`Invalid Project.github assigned to "${x.name}"!`);
+	if (!hasOwnProperty(x, `github`)) console.warn(`No Project.github assigned to "${x.name}"!`);
+	else if (typeof x.github !== `string`) {
+		console.warn(`Invalid Project.github assigned to "${x.name}"!`);
+		delete x.github;
+	}
 
 	return x as Project;
 }
@@ -70,34 +79,48 @@ async function fetchProjects (): Promise<Project[]> {
 	const response = await fetch(`${process.env.BASE_URL}/projects.json`);
 	const json = await response.json();
 
-	return parseProjects(json);
+	const projects = parseProjects(json);
+	return projects.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 // Main Component
 
 export default async function HomePage () {
 	const projects = await fetchProjects();
-	console.log(`projects`, projects);
+	console.log(`Projects (${projects.length}):`, projects.map(x => x.name));
 
 	return (
-		<div className="w-screen h-screen">
+		<div className="max-w-screen min-h-screen overflow-x-hidden flex flex-col justify-between">
 			{/* Header */}
-			<div className="w-screen bg-primary text-white text-center">
+			<div className="w-screen bg-primary text-white text-center mb-2">
 				<div className="text-3xl">rangicus.xyz</div>
 				<div className="text-xl">personal site & portfolio</div>
 			</div>
 
 			{/* Projects */}
-			<div className="text-2xl text-center text-foreground underline">Projects</div>
-			<div className="text-foreground text-center mb-2">
-				This is a random assortment of projects that I&apos;ve found myself working on in my spare time.<br />
-				If you have any ideas for additions to projects or new ones entirely, shoot me an email and I&apos;ll look into it.
-			</div>
-			<div className="w-screen flex flex-wrap gap-3 justify-around">
-				{projects.map((project) => (
-					<ProjectItem project={project} key={project.name} />
-				))}
-			</div>
+			<section className="flex-grow">
+				{/* Text */}
+				<div className="text-2xl text-center text-foreground underline">Projects</div>
+				<div className="text-foreground text-center mb-2">
+					This is a random assortment of projects that I&apos;ve found myself working on in my spare time.<br />
+					If you have any ideas for additions to projects or new ones entirely, shoot me an email and I&apos;ll look into it.
+				</div>
+
+				{/* Projects Display */}
+				<div className="w-screen flex flex-wrap gap-3 justify-center">
+					{projects.map((project) => (
+						<ProjectItem project={project} key={project.name} />
+					))}
+				</div>
+			</section>
+
+			{/* Footer */}
+			<footer className="w-screen flex justify-center mb-2 mt-5 text-gray-500">
+				{/* GitHub */}
+				<a href="https://github.com/rangicus" target="_blank">
+					<FaGithub />
+				</a>
+			</footer>
 		</div>
 	);
 }

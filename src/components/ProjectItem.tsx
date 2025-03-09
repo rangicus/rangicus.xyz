@@ -12,11 +12,11 @@ export default function ProjectItem ({ project }: {
 	// Rendering
 
 	return (
-		<div className="w-sm rounded bg-gray-800 shadow shadow-gray-700">
+		<div className="w-sm rounded bg-gray-800 shadow shadow-gray-700 flex flex-col justify-between">
 			{/* Image here. */}
             {(project.img) && <img className="w-full aspect-video" src={project.img} />}
 
-			<div className="px-2 py-4">
+			<div className="px-2 py-4 flex-grow">
 				<div className="font-bold text-xl mb-2">{project.name}</div>
 				<p className="text-base">{project.desc}</p>
 			</div>
@@ -35,8 +35,6 @@ export default function ProjectItem ({ project }: {
                         </button>
                     </a>
                 )}
-
-				{/* <button>Github</button> */}
 			</div>
 		</div>
 	)
